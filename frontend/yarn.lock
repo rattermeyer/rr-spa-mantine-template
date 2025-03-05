@@ -2059,24 +2059,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tabler/icons-react@npm:^3.30.0":
-  version: 3.30.0
-  resolution: "@tabler/icons-react@npm:3.30.0"
-  dependencies:
-    "@tabler/icons": "npm:3.30.0"
-  peerDependencies:
-    react: ">= 16"
-  checksum: 10c0/21c92de4746fd2dcbb4a691fc9e1ac12a56bfb2d1b3a0994327d5bd994504fd6f8eb6badd754e18a1c6099af5595da380cbcf001c2f86a00084d4b9202999498
-  languageName: node
-  linkType: hard
-
-"@tabler/icons@npm:3.30.0":
-  version: 3.30.0
-  resolution: "@tabler/icons@npm:3.30.0"
-  checksum: 10c0/887122d17f99be75c4a842cdf7af16af2d1abb74e53776f3848d6c05236907ab4d6714a3b4a012437d5e6dbb9d1dd152c97e9311b6a28e079e14bedf742e5192
-  languageName: node
-  linkType: hard
-
 "@tailwindcss/node@npm:4.0.9":
   version: 4.0.9
   resolution: "@tailwindcss/node@npm:4.0.9"
@@ -6449,7 +6431,6 @@ __metadata:
     "@react-router/dev": "npm:^7.2.0"
     "@react-router/node": "npm:^7.2.0"
     "@react-router/serve": "npm:^7.2.0"
-    "@tabler/icons-react": "npm:^3.30.0"
     "@tailwindcss/vite": "npm:^4.0.0"
     "@types/node": "npm:^20"
     "@types/pg": "npm:^8.11.11"
