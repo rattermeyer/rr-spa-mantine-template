@@ -1,0 +1,21 @@
+= README
+
+Datenbankschema Update
+
+.Update des Datenbankschemas (ohne Anlegen von Testdaten)
+[source,bash]
+----
+./gradlew update
+----
+
+.Update des Datenbankschemas (mit Anlegen eines Admin Nutzers)
+[source,bash]
+----
+./gradlew update -Dliquibase.contextFilter=admin
+----
+
+.Update des Datenbankschemas (mit Anlegen von Testdaten)
+[source,bash]
+----
+./gradlew update -Dliquibase.contextFilter=test
+----

@@ -1,0 +1,16 @@
+[versions]
+jooq = "3.19.10"
+postgresqlVersion = "42.7.2"
+liquibaseVersion = "4.29.0"
+
+[libraries]
+liquibase-core = { module = "org.liquibase:liquibase-core", version.ref = "liquibaseVersion" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresqlVersion" }
+picocli = { module = "info.picocli:picocli", version = "4.7.6" }
+
+[bundles]
+liquibase = ["liquibase-core", "postgresql", "picocli"]
+
+[plugins]
+liquibase = { id = "org.liquibase.gradle", version = "2.2.1" }
+dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }

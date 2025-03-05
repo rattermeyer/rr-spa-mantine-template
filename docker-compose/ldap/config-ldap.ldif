@@ -1,0 +1,42 @@
+dn: dc=example,dc=com
+objectClass: dcObject
+objectClass: organization
+o: Example Company
+dc: example
+
+dn: ou=users,dc=example,dc=com
+objectClass: organizationalUnit
+ou: users
+
+dn: cn=jane,ou=users,dc=example,dc=com
+objectClass: person
+objectClass: inetOrgPerson
+sn: doe
+cn: Jane Doe
+mail: jane.doe@example.com
+userpassword: {SSHA}r2wpRoouMCUZ7Tf6psXjkTDoDFqYOeFI
+
+dn: cn=john,ou=users,dc=example,dc=com
+objectClass: person
+objectClass: inetOrgPerson
+sn: doe
+cn: John Doe
+mail: john.doe@example.com
+userpassword: {SSHA}r2wpRoouMCUZ7Tf6psXjkTDoDFqYOeFI
+
+# Group definitions.
+
+dn: ou=Groups,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=admins,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+cn: admins
+member: cn=john,ou=users,dc=example,dc=com
+member: cn=jane,ou=users,dc=example,dc=com
+
+dn: cn=developers,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+cn: developers
+member: cn=jane,ou=users,dc=example,dc=com

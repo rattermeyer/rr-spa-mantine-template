@@ -1,0 +1,80 @@
+volumes:
+  postgres-data:
+  mailpit-data:
+services:
+  caddy:
+    build:
+      context: ./docker-compose/caddy
+    volumes:
+      - ./docker-compose/caddy/Caddyfile:/etc/caddy/Caddyfile:Z
+      - ./docker-compose/caddy/certs:/root/.caddy/certs:Z
+    network_mode: host
+    environment:
+      HOST_IP: ${HOST_IP}
+  postgres:
+    build:
+      context: ./docker-compose/postgres
+    shm_size: "128mb"
+    environment:
+      - POSTGRES_PASSWORD=changeme
+      - POSTGRESQL_MULTIPLE_DATABASES=chinook,dex
+    volumes:
+      - "./docker-compose/postgres/initdb.d:/docker-entrypoint-initdb.d:Z"
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+  pgbouncer:
+    container_name: pgbouncer
+    image: edoburu/pgbouncer:latest
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=changeme
+      - DB_HOST=postgres
+      - AUTH_TYPE=scram-sha-256 # remove/comment this line if using postgres:13 and lower
+      - POOL_MODE=session
+      - ADMIN_USERS=postgres,dbuser
+      - IGNORE_STARTUP_PARAMETERS=search_path,extra_float_digits
+      - SERVER_RESET_QUERY="DISCARD ALL"
+    ports:
+      - "5432:5432"
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-h', 'localhost']
+  smtp:
+    image: axllent/mailpit:v1.20.7
+    restart: unless-stopped
+    ports:
+      - "2025:1025"
+      - "8025:8025"
+    volumes:
+        - mailpit-data:/data
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_UI_AUTH: "smtp:changeme"
+  ldap:
+    image: bitnami/openldap:2.6.9
+    environment:
+      BITNAMI_DEBUG: "true"
+      LDAP_ROOT: "dc=example,dc=com"
+      LDAP_ADMIN_USERNAME: "admin"
+      LDAP_ADMIN_PASSWORD: "changeme"
+      LDAP_ADMIN_DN: "cn=admin,dc=example,dc=com"
+    ports:
+      - "1389:1389"
+      - "1636:1636"
+    volumes:
+      - ./docker-compose/ldap/config-ldap.ldif:/ldifs/config-ldap.ldif:Z
+  dex:
+    image: dexidp/dex:v2.41.1
+    ports:
+      - "5556:5556"
+      - "5554:5554"
+    command: ["dex", "serve", "/etc/dex/config.yaml"]
+    volumes:
+      - ./docker-compose/dex/config.yaml:/etc/dex/config.yaml:Z
+    depends_on:
+      - pgbouncer

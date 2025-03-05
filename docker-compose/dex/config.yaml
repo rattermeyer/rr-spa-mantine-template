@@ -1,0 +1,210 @@
+# The base path of Dex and the external name of the OpenID Connect service.
+# This is the canonical URL that all clients MUST use to refer to Dex. If a
+# path is provided, Dex's HTTP service will listen at a non-root URL.
+# TODO: This actually should be made configurable (dex supports gotemplate)
+issuer: https://auth.127.0.0.1.nip.io:8443/dex
+
+# The storage configuration determines where Dex stores its state.
+# Supported options include:
+#   - SQL flavors
+#   - key-value stores (eg. etcd)
+#   - Kubernetes Custom Resources
+#
+# See the documentation (https://dexidp.io/docs/storage/) for further information.
+storage:
+  type: postgres
+  config:
+    host: pgbouncer
+    port: 5432
+    database: dex
+    user: dex_admin
+    password: dex_admin
+    ssl:
+      mode: disable
+
+  # type: sqlite3
+  # config:
+  #   file: /var/dex/dex.db
+
+  # type: mysql
+  # config:
+  #   host: 127.0.0.1
+  #   port: 3306
+  #   database: dex
+  #   user: mysql
+  #   password: mysql
+  #   ssl:
+  #     mode: "false"
+
+  # type: postgres
+  # config:
+  #   host: postgres # see compose.yaml
+  #   port: 5432
+  #   database: dex
+  #   user: dex_admin
+  #   password: dex_admin
+  #   ssl:
+  #     mode: disable
+
+  # type: etcd
+  # config:
+  #   endpoints:
+  #     - http://127.0.0.1:2379
+  #   namespace: dex/
+
+  # type: kubernetes
+  # config:
+  #   kubeConfigFile: $HOME/.kube/config
+
+# HTTP service configuration
+web:
+  http: 0.0.0.0:5556
+
+  # Uncomment to enable HTTPS endpoint.
+  # https: 127.0.0.1:5554
+  # tlsCert: /etc/dex/tls.crt
+  # tlsKey: /etc/dex/tls.key
+  # tlsMinVersion: 1.2
+  # tlsMaxVersion: 1.3
+
+# Dex UI configuration
+frontend:
+  issuer: dex
+  logoURL: theme/logo.png
+  dir: ""
+  theme: light
+
+# Telemetry configuration
+# telemetry:
+#   http: 127.0.0.1:5558
+
+logger:
+  level: "debug"
+  format: "text" # can also be "json"
+
+# gRPC API configuration
+# Uncomment this block to enable the gRPC API.
+# See the documentation (https://dexidp.io/docs/api/) for further information.
+# grpc:
+#   addr: 127.0.0.1:5557
+#   tlsCert: examples/grpc-client/server.crt
+#   tlsKey: examples/grpc-client/server.key
+#   tlsClientCA: examples/grpc-client/ca.crt
+
+# Expiration configuration for tokens, signing keys, etc.
+expiry:
+  deviceRequests: "5m"
+  signingKeys: "6h"
+  idTokens: "24h"
+  refreshTokens:
+    disableRotation: false
+    reuseInterval: "3s"
+    validIfNotUsedFor: "2160h" # 90 days
+    absoluteLifetime: "3960h" # 165 days
+
+# OAuth2 configuration
+oauth2:
+  # use ["code", "token", "id_token"] to enable implicit flow for web-only clients
+  responseTypes: ["code", "token", "id_token"] # also allowed are "token" and "id_token"
+
+  # By default, Dex will ask for approval to share data with application
+  # (approval for sharing data from connected IdP to Dex is separate process on IdP)
+  skipApprovalScreen: true
+
+  # If only one authentication method is enabled, the default behavior is to
+  # go directly to it. For connected IdPs, this redirects the browser away
+  # from application to upstream provider such as the Google login page
+  alwaysShowLoginScreen: true
+
+  # Uncomment to use a specific connector for password grants
+  passwordConnector: local
+
+# Static clients registered in Dex by default.
+#
+# Alternatively, clients may be added through the gRPC API.
+# staticClients:
+#   - id: example-app
+#     redirectURIs:
+#       - 'http://127.0.0.1:5555/callback'
+#     name: 'Example App'
+#     secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+staticClients:
+  - id: app
+    redirectURIs:
+      - "http://127.0.0.1:5555/callback"
+      - "http://httpbin.org/get"
+      - "http://127.0.0.1:5173/protected"
+      - "http://127.0.0.1:5173/protected"
+      - "http://127.0.0.1:5173/auth/callback"
+      - "http://localhost:5173/auth/callback"
+      - "https://app.127.0.0.1.nip.io:8443/protected"
+      - "https://app.127.0.0.1.nip.io:8443/auth/callback"
+    name: "APP"
+    secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+
+# Connectors are used to authenticate users against upstream identity providers.
+#
+# See the documentation (https://dexidp.io/docs/connectors/) for further information.
+# connectors: []
+connectors:
+  - type: ldap
+    name: OpenLDAP
+    id: ldap
+    config:
+      host: ldap:1389
+      insecureNoSSL: true
+      # This would normally be a read-only user.
+      bindDN: "cn=admin,dc=example,dc=com"
+      bindPW: "changeme"
+      usernamePrompt: Email Address
+      userSearch:
+        baseDN: "ou=users,dc=example,dc=com"
+        filter: "(objectClass=person)"
+        username: mail
+        idAttr: "DN"
+        emailAttr: "mail"
+        nameAttr: "cn"
+      groupSearch:
+        baseDN: "ou=groups,dc=example,dc=com"
+        filter: "(objectClass=groupOfNames)"
+        userMatchers:
+          - userAttr: "DN"
+            groupAttr: "member"
+        nameAttr: "cn"
+
+# Enable the password database.
+#
+# It's a "virtual" connector (identity provider) that stores
+# login credentials in Dex's store.
+enablePasswordDB: true
+
+# If this option isn't chosen users may be added through the gRPC API.
+# A static list of passwords for the password connector.
+#
+# Alternatively, passwords my be added/updated through the gRPC API.
+staticPasswords:
+  - email: "user1@example.com"
+    # bcrypt hash of the string "changeme": $(echo changeme | htpasswd -BinC 10 user1 | cut -d: -f2)
+    hash: "$2y$10$g7I2/UHhHs/jXGhwV8Jbt.RUJoqt0zx1znc9FTI0/xgBHozH5VxYC"
+    username: "user1"
+    userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+  - email: "user2@example.com"
+    hash: "$2y$10$g7I2/UHhHs/jXGhwV8Jbt.RUJoqt0zx1znc9FTI0/xgBHozH5VxYC"
+    username: "user2"
+    userID: "5c30177b-59fb-4287-93b6-c2689bc79566"
+  - email: "user3@example.com"
+    hash: "$2y$10$YvEhvooNjHPMDK5u0ZW2iuD/QDpwFWUecy54BML.EEN3mtaJ25GAK"
+    username: "user3"
+    userID: "c7f4f8f6-6e4b-4e4b-8b1e-4f4b6e4b6e4b"
+  - email: "user4@example.com"
+    hash: "$2y$10$YvEhvooNjHPMDK5u0ZW2iuD/QDpwFWUecy54BML.EEN3mtaJ25GAK"
+    username: "user4"
+    userID: "375d25ee-f9bf-46ab-ab7a-46c4d8fd3fb5"
+  - email: "user5@example.com"
+    hash: "$2y$10$iQheflVSyTjIue9dg7w5eeidDSSw2cvgwnVc33Ftoq6Yx/g4zB0fi"
+    username: "user5"
+    userID: "95cb1cb7-9552-4009-921d-812e75e8f44a"
+  - email: "admin@example.com"
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: "admin"
+    userID: "97202c3e-8c4f-41e8-a9e8-d5005a11a49c"

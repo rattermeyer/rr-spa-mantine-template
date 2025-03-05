@@ -1,0 +1,18 @@
+.wrapper {
+    padding: calc(var(--mantine-spacing-xl) * 6) calc(var(--mantine-spacing-xl) * 6);
+}
+
+.title {
+    font-family:
+            Greycliff CF,
+            var(--mantine-font-family);
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--mantine-spacing-md);
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+}
+
+body {
+    background-color: white;
+}

@@ -1,0 +1,34 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"defaultBranch": "origin/main",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignore": ["*.module.css", ".pnp.*"]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		}
+	},
+	"css": {
+		"parser": {
+			"cssModules": true
+		},
+		"linter": {
+			"enabled": true
+		}
+	}
+}

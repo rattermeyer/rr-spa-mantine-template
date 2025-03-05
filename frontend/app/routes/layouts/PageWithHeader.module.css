@@ -1,0 +1,5 @@
+.main {
+    min-height: calc(100vh - var(--app-shell-header-height - var(--app-shell-footer-height)));
+    margin-top: var(--app-shell-header-height);
+    margin-bottom: calc(120px + 120px);
+}

@@ -1,0 +1,24 @@
+{
+	log
+	servers {
+		metrics
+	}
+}
+
+(tls_config) {
+	tls /root/.caddy/certs/_wildcard.127.0.0.1.nip.io.pem /root/.caddy/certs/_wildcard.127.0.0.1.nip.io-key.pem
+}
+
+*.127.0.0.1.nip.io:8443 {
+	import tls_config
+
+	@auth host auth.127.0.0.1.nip.io
+	handle @auth {
+		reverse_proxy {env.HOST_IP}:5556
+	}
+
+	@app host app.127.0.0.1.nip.io
+	handle @app {
+		reverse_proxy {env.HOST_IP}:5173
+	}
+}
