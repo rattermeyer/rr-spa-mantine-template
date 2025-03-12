@@ -1,7 +1,6 @@
-import { createFileSessionStorage } from "@react-router/node";
-import { createCookie } from "react-router";
-import type { Account } from "~/shared/domain/Account.model";
-import { authenticator } from "~/shared/services/auth.server";
+import {createFileSessionStorage} from "@react-router/node";
+import {createCookie} from "react-router";
+import type {Account} from "~/shared/domain/Account.model";
 
 const sessionCookieName = "__session";
 const sessionCookie = createCookie(sessionCookieName, {
@@ -13,6 +12,7 @@ const sessionCookie = createCookie(sessionCookieName, {
 	secure:
 		process.env.SECURE === "true" || process.env.NODE_ENV === "production", // enable this in prod only
 	// secure: true, // if you have always-on HTTPS, enable this, in all environments
+    maxAge: process.env.COOKIE_MAX_AGE ? Number.parseInt(process.env.COOKIE_MAX_AGE) : 60 * 60 // 1 hour
 });
 
 export const sessionStorage = createFileSessionStorage({
@@ -21,7 +21,8 @@ export const sessionStorage = createFileSessionStorage({
 });
 
 export const getSessionFromRequest = async (request: Request) => {
-	return await sessionStorage.getSession(request.headers.get("Cookie"));
+    const cookie = await sessionCookie.parse(request.headers.get("Cookie"));
+    return await sessionStorage.getSession(request.headers.get("Cookie"));
 };
 
 export const getUserFromRequest = async (
