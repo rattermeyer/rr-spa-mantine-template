@@ -1,8 +1,8 @@
 import type {CustomerView} from '~/shared/infrastructure/db/model/kysely/tables';
 import {useMemo} from 'react';
 import {MantineReactTable, type MRT_ColumnDef, useMantineReactTable} from 'mantine-react-table';
-import {Button} from '@mantine/core';
-import {NavLink} from 'react-router';
+import {Button, Flex} from '@mantine/core';
+import {NavLink, Link} from 'react-router';
 import {RemixFormProvider, useRemixForm} from 'remix-hook-form';
 import {CustomerForm} from '~/pages/CustomerListPage/ui/CustomerForm';
 import type {Customer} from '~/shared/domain/Customer.model';
@@ -39,9 +39,14 @@ export function CustomerListPage(props: { customers: Customer[] }) {
         getRowId: (row) => String(row.customerId),
         enableRowActions: true,
         enableGrouping: true,
-        renderRowActions: (row) => (<RowActions urlPrefix={"/customers"} id={row.row.id} keyDisplay={row.row.original.firstName ?? ''}/>),
+        renderRowActions: (row) => (
+            <RowActions urlPrefix={"/customers"} id={row.row.id} keyDisplay={row.row.original.firstName ?? ''}/>),
         renderTopToolbarCustomActions: ({table}) => (
-            <Button size="xs" color="blue" component={NavLink} to="/customers/new">New Customer</Button>
+            <Flex gap="md">
+                <Button size="xs" color="blue" component={NavLink} to="/customers/new">New Customer</Button>
+                <Button size="xs" color="blue" component={Link} reloadDocument={true} to="/customers/export">CSV (server)</Button>
+                <Button size="xs" color="blue" component={Link} reloadDocument={true} to="/customers/export?format=xlsx">XLSX (server)</Button>
+            </Flex>
         ),
         renderDetailPanel: (row) => {
             const customerRow = row.row.original;

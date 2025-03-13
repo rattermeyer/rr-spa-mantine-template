@@ -29,7 +29,7 @@ export async function action({request}: Route.ActionArgs) {
 }
 
 export default function NewCustomer({loaderData}: Route.ComponentProps) {
-    const {handleSubmit, formState: {errors}, register} = useRemixForm<CreateCustomer>({
+    const {handleSubmit, formState: {errors, isSubmitting}, register} = useRemixForm<CreateCustomer>({
         resolver
     })
     return (
@@ -41,7 +41,7 @@ export default function NewCustomer({loaderData}: Route.ComponentProps) {
                         <TextInput label={"Last Name"} {...register('lastName')} error={errors.lastName?.message}/>
                         <TextInput label={"Email"} {...register('email')} error={errors.email?.message}/>
                     </SimpleGrid>
-                    <Flex><Button type={"submit"} leftSection={<TbDeviceFloppy size={20}/>}>Create</Button></Flex>
+                    <Flex><Button type={"submit"} leftSection={<TbDeviceFloppy size={20}/>} disabled={isSubmitting}>{isSubmitting ? "Submitting": "Create"}</Button></Flex>
                 </Stack>
             </Form>
         </div>

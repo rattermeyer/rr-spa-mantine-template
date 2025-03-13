@@ -15,6 +15,7 @@ export default [
             route("/customers/edit/:id", "routes/customers/edit.tsx"),
             route("/customers/delete", "routes/customers/delete.tsx"),
             route("/customers/new", "routes/customers/new.tsx"),
+            route("/customers/export", "routes/customers/export.ts"),
         ]),
         route("profile", "routes/profile/profile.tsx"),
 	]),
