@@ -9,7 +9,7 @@ import type {Account} from '~/shared/domain/Account.model';
 describe('AccountService', () => {
     const mockDb = {
         transaction: vi.fn().mockImplementation(() => ({
-            execute: async (callback: Transaction<DB>) => await callback(mockDb)
+            execute: (fn: (tx: Transaction<DB>) => Promise<Account | undefined>) => fn(mockDb)
         }))
     } as unknown as Transaction<DB>;
     const mockAccountRepository = mock<AccountRepository>();
@@ -39,7 +39,7 @@ describe('AccountService', () => {
         expect(mockDb.transaction).toHaveBeenCalled();
         expect(mockAccountRepository.findAccountByEmail).toHaveBeenCalledWith(createAccount.email);
     });
-    
+
     test('getOrCreateAccount create non-existing account', async () => {
         // search for account by email and return the account
         mockAccountRepository.findAccountByEmail.calledWith(createAccount.email).mockResolvedValue(undefined)
