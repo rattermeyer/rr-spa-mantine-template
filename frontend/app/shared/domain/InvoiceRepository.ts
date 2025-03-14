@@ -1,8 +1,7 @@
-
 export interface InvoiceRepository {
-    deleteInvoiceByCustomerId(customerId: number): Promise<void>;
+	deleteInvoiceByCustomerId(customerId: number): Promise<void>;
 }
 
 namespace InvoiceRegistry {
-    export const type = Symbol.for('InvoiceRepository');
+	export const type = Symbol.for("InvoiceRepository");
 }

@@ -6,11 +6,11 @@ import {
 	ThemeIcon,
 	Title,
 } from "@mantine/core";
+import { useTranslation } from "react-i18next";
 import { SiReactrouter } from "react-icons/si";
 import { TbBrandMantine, TbClipboardText, TbTable } from "react-icons/tb";
 import { NavLink } from "react-router";
 import classes from "./FeaturesTitle.module.css";
-import {useTranslation} from 'react-i18next';
 
 const features = [
 	{
@@ -59,7 +59,7 @@ export function FeaturesTitle() {
 			</Text>
 		</div>
 	));
-    const { t } = useTranslation()
+	const { t } = useTranslation();
 
 	return (
 		<div className={classes.wrapper}>
@@ -82,7 +82,7 @@ export function FeaturesTitle() {
 						component={NavLink}
 						to="/login"
 					>
-                        {t("Login")}
+						{t("Login")}
 					</Button>
 				</Grid.Col>
 				<Grid.Col span={{ base: 12, md: 7 }}>

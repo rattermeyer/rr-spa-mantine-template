@@ -15,7 +15,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 	}
 	session.set("user", user);
 	const returnTo = session.get("returnTo");
-    session.unset("returnTo");
+	session.unset("returnTo");
 	const headers = new Headers({
 		"Set-Cookie": await commitSession(session),
 	});
