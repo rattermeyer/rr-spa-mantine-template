@@ -1,8 +1,8 @@
 import { redirect } from "react-router";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
-import { container } from "~/InversifyConfig.server";
-import { CustomerService } from "~/shared/domain/CustomerService";
+import { container } from "~/inversify-config.server";
+import { CustomerService } from "~/shared/domain/customer-service";
 import { authenticate } from "~/shared/services/auth.server";
 import type { Route } from "./+types/delete";
 

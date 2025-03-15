@@ -1,4 +1,4 @@
-import { FeaturesTitle } from "~/pages/FeaturesTitle/FeaturesTitle";
+import { FeaturesTitle } from "~/pages/features-title/features-title";
 import { Welcome } from "~/pages/welcome/welcome";
 import type { Route } from "./+types/home";
 

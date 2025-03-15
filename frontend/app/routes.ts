@@ -8,7 +8,7 @@ import {
 export default [
 	index("routes/home.tsx"),
 	route("/my-form", "routes/my-form.tsx"),
-	layout("routes/layouts/PageWithHeader.tsx", [
+	layout("routes/layouts/page-with-header.tsx", [
 		route("dashboard", "routes/dashboard.tsx"),
 		route("/customers", "routes/customers/layout.tsx", [
 			index("routes/customers/index.tsx"),
@@ -22,8 +22,8 @@ export default [
 	route("login", "routes/login/login.tsx", [
 		index("routes/login/login-form.tsx"),
 	]),
-	route("login-sso", "routes/login/LoginSSO.tsx"),
-	route("/auth/callback", "routes/auth/Callback.tsx"),
-	route("/logout", "routes/auth/Logout.tsx"),
-	route("/logout-confirm", "routes/auth/LogoutConfirm.tsx"),
+	route("login-sso", "routes/login/login-sso.tsx"),
+	route("/auth/callback", "routes/auth/callback.tsx"),
+	route("/logout", "routes/auth/logout.tsx"),
+	route("/logout-confirm", "routes/auth/logout-confirm.tsx"),
 ] satisfies RouteConfig;

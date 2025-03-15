@@ -5,14 +5,14 @@ import {
 	getValidatedFormData,
 	useRemixForm,
 } from "remix-hook-form";
-import { CustomerForm } from "~/pages/CustomerListPage/ui/CustomerForm";
-import { filterNonNullAttributes } from "~/shared/ObjectHandler";
+import { CustomerForm } from "~/pages/customer-list-page/ui/customer-form";
 import {
 	type Customer,
 	type UpdateCustomer,
 	updateCustomer,
-} from "~/shared/domain/Customer.model";
+} from "~/shared/domain/customer.model";
 import { kyselyBuilder } from "~/shared/infrastructure/db/db.server";
+import { filterNonNullAttributes } from "~/shared/object-handler";
 import { authenticate } from "~/shared/services/auth.server";
 import type { Route } from "./+types/edit";
 

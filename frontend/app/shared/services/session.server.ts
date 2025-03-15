@@ -1,6 +1,6 @@
 import { createFileSessionStorage } from "@react-router/node";
 import { createCookie } from "react-router";
-import type { Account } from "~/shared/domain/Account.model";
+import type { Account } from "~/shared/domain/account.model";
 
 const sessionCookieName = "__session";
 const sessionCookie = createCookie(sessionCookieName, {

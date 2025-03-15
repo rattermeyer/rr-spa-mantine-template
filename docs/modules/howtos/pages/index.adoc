@@ -10,13 +10,17 @@ Here you find several how-tos that will help you to get started with the differe
 * Generating documentation website
 * Generating PDF documentation
 * Writing diagrams as code
-* Extending structurizr
+* Extending structurizr workspaces
 * Generating types for routes
 * Query database and show list of results
 * Create a new entity using a form
 * Run E2e Tests
 * Adding e2e Test
 * Show a11y result
+* Generate docker images
+* Generate TLS certificates for local development
+* devbox shell
+
 
 == Concepts
 
@@ -26,5 +30,7 @@ Here you find several how-tos that will help you to get started with the differe
 * Authentication against OIDC Provider
 * Yarn PnP
 * Gradle version catalog
-
+* IntelliJ Projects
+* .env and dotenvx
+* Naming conventions
 

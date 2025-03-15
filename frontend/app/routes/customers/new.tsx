@@ -4,13 +4,13 @@ import type { Kysely } from "kysely";
 import { TbDeviceFloppy } from "react-icons/tb";
 import { Form, data, redirect } from "react-router";
 import { getValidatedFormData, useRemixForm } from "remix-hook-form";
-import { container } from "~/InversifyConfig.server";
-import type { CustomerRepository } from "~/pages/CustomerListPage/domain/Customer.repository";
+import { container } from "~/inversify-config.server";
+import type { CustomerRepository } from "~/pages/customer-list-page/domain/customer.repository";
 import {
 	type CreateCustomer,
 	type Customer,
 	createCustomer,
-} from "~/shared/domain/Customer.model";
+} from "~/shared/domain/customer.model";
 import type { DB } from "~/shared/infrastructure/db/model/kysely/tables";
 import { authenticate } from "~/shared/services/auth.server";
 import type { Route } from "./+types/new";

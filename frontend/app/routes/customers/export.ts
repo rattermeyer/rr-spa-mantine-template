@@ -1,7 +1,7 @@
 import type { Kysely } from "kysely";
 import { type BookType, utils, write } from "xlsx";
-import { container } from "~/InversifyConfig.server";
-import type { CustomerRepository } from "~/pages/CustomerListPage/domain/Customer.repository";
+import { container } from "~/inversify-config.server";
+import type { CustomerRepository } from "~/pages/customer-list-page/domain/customer.repository";
 import type { DB } from "~/shared/infrastructure/db/model/kysely/tables";
 import { authenticate } from "~/shared/services/auth.server";
 import type { Route } from "./+types/export";
