@@ -1,4 +1,4 @@
-import { LogoutBanner } from "~/components/LogoutBanner/logout-banner";
+import { LogoutBanner } from "~/components/logout-banner/logout-banner";
 import { getUserFromRequest } from "~/shared/services/session.server";
 import type { Route } from "./+types/logout-confirm";
 

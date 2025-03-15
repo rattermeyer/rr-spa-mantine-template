@@ -1,8 +1,8 @@
 import { Container, type interfaces } from "inversify";
 import type { Kysely } from "kysely";
-import { AccountRepository } from "~/pages/AuthenticationForm/domain/account.repository";
-import { AccountService } from "~/pages/AuthenticationForm/domain/account.service";
-import { AccountRepositoryImpl } from "~/pages/AuthenticationForm/infrastructure/account-repository-impl";
+import { AccountRepository } from "~/pages/authentication-form/domain/account.repository";
+import { AccountService } from "~/pages/authentication-form/domain/account.service";
+import { AccountRepositoryImpl } from "~/pages/authentication-form/infrastructure/account-repository-impl";
 import type { CustomerRepository } from "~/pages/customer-list-page/domain/customer.repository";
 import { CustomerRepositoryImpl } from "~/pages/customer-list-page/infrastructure/customer-repository-impl";
 import { CustomerService } from "~/shared/domain/customer-service";

@@ -1,4 +1,4 @@
-import { AuthenticationForm } from "~/pages/AuthenticationForm/ui/authentication-form";
+import { AuthenticationForm } from "~/pages/authentication-form/ui/authentication-form";
 import "./login.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getValidatedFormData } from "remix-hook-form";

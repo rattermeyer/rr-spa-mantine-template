@@ -7,7 +7,7 @@ import {
 import { useMemo } from "react";
 import { Link, NavLink } from "react-router";
 import { RemixFormProvider, useRemixForm } from "remix-hook-form";
-import { RowActions } from "~/components/RowActions/row-actions";
+import { RowActions } from "~/components/row-actions/row-actions";
 import { CustomerForm } from "~/pages/customer-list-page/ui/customer-form";
 import type { Customer } from "~/shared/domain/customer.model";
 import type { CustomerView } from "~/shared/infrastructure/db/model/kysely/tables";

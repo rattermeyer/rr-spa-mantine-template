@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import type { Kysely } from "kysely";
-import type { AccountRepository } from "~/pages/AuthenticationForm/domain/account.repository";
+import type { AccountRepository } from "~/pages/authentication-form/domain/account.repository";
 import type {
 	CreateAccount,
 	Account as DomainAccount,

@@ -2,7 +2,7 @@ import type { Transaction } from "kysely";
 import type { DB } from "kysely-codegen";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { anyString, mock } from "vitest-mock-extended";
-import type { AccountRepository } from "~/pages/AuthenticationForm/domain/account.repository";
+import type { AccountRepository } from "~/pages/authentication-form/domain/account.repository";
 import type { Account } from "~/shared/domain/account.model";
 import { AccountService } from "./account.service";
 

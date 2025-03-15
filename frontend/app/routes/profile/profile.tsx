@@ -6,7 +6,7 @@ import { Form, data, redirect } from "react-router";
 import { getValidatedFormData, useRemixForm } from "remix-hook-form";
 import { z } from "zod";
 import { container } from "~/inversify-config.server";
-import type { AccountRepository } from "~/pages/AuthenticationForm/domain/account.repository";
+import type { AccountRepository } from "~/pages/authentication-form/domain/account.repository";
 import type {
 	DB,
 	Preference,

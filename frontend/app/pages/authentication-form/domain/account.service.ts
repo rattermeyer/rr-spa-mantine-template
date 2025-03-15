@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import type { Kysely } from "kysely";
 import type { DB } from "kysely-codegen";
-import type { AccountRepository } from "~/pages/AuthenticationForm/domain/account.repository";
+import type { AccountRepository } from "~/pages/authentication-form/domain/account.repository";
 import type { Account, CreateAccount } from "~/shared/domain/account.model";
 
 export class AccountService {

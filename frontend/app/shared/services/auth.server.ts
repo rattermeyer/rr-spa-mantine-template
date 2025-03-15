@@ -7,7 +7,7 @@ import { CodeChallengeMethod, OAuth2Strategy } from "remix-auth-oauth2";
 import { v7 as uuidv7 } from "uuid";
 import { zfd } from "zod-form-data";
 import { container } from "~/inversify-config.server";
-import { AccountService } from "~/pages/AuthenticationForm/domain/account.service";
+import { AccountService } from "~/pages/authentication-form/domain/account.service";
 import type { Account, CreateAccount } from "~/shared/domain/account.model";
 import { AuthenticationFormData } from "~/shared/infrastructure/web/authentication-form-data";
 import {

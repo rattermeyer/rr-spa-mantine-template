@@ -19,7 +19,7 @@ import {
 } from "react-icons/tb";
 import { Form } from "react-router";
 import type { Account } from "~/shared/domain/account.model";
-import { LinksGroup } from "../NavbarLinksGroup/navbar-links-group";
+import { LinksGroup } from "../navbar-links-group/navbar-links-group";
 import classes from "./navbar-nested.module.css";
 
 const mockdata = [
