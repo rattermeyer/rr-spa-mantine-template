@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chinook?current_schema=chinook
+    username: chinook_admin
+    password: chinook_admin
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        data: DEBUG
+        security: DEBUG
+

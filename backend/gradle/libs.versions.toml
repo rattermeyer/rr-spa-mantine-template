@@ -2,15 +2,25 @@
 jooq = "3.19.10"
 postgresqlVersion = "42.7.2"
 liquibaseVersion = "4.29.0"
+springbootVersion = "3.4.3"
+springdocVersion = "2.8.5"
+jooqVersion = "3.19.18"
 
 [libraries]
 liquibase-core = { module = "org.liquibase:liquibase-core", version.ref = "liquibaseVersion" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresqlVersion" }
 picocli = { module = "info.picocli:picocli", version = "4.7.6" }
+springdoc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
+springdoc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version.ref = "springdocVersion" }
 
 [bundles]
 liquibase = ["liquibase-core", "postgresql", "picocli"]
+springdoc = ["springdoc-ui", "springdoc-api"]
 
 [plugins]
 liquibase = { id = "org.liquibase.gradle", version = "2.2.1" }
 dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }
+springboot = { id = "org.springframework.boot", version.ref = "springbootVersion" }
+spring-dependency-management = { id = "io.spring.dependency-management", version= "1.1.7" }
+cyclonedx-bom = { id = "org.cyclonedx.bom", version = "2.2.0" }
+jooq-plugin = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooqVersion" }
