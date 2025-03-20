@@ -5,12 +5,12 @@ import {Form, redirect} from "react-router";
 import {type CreateCustomer, createCustomer,} from "~/shared/domain/customer.model";
 import type {Route} from "./+types/new";
 import {getValidatedFormData, useRemixForm} from 'remix-hook-form';
-import {Configuration, CustomerEntityControllerApi} from '~/shared/infrastructure/rest-client/backend';
+import {CustomerControllerApi,} from '~/shared/infrastructure/rest-client/backend';
 import {container} from '~/inversify-config';
 import {CustomerRepository} from '~/modules/customer/domain/customer.repository';
 
 const resolver = zodResolver(createCustomer);
-const customerApi = container.get<CustomerEntityControllerApi>(CustomerEntityControllerApi)
+const customerApi = container.get<CustomerControllerApi>(CustomerControllerApi);
 const customerRepository = container.get<CustomerRepository>(CustomerRepository.type);
 
 export async function clientAction({request}: Route.ClientActionArgs) {

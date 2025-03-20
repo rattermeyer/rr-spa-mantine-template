@@ -9,7 +9,8 @@ const schema = zfd.formData({ id: z.string() });
 const service = container.get<CustomerService>(CustomerService);
 
 export async function clientAction({ request, params }: Route.ClientActionArgs) {
-	const { id } = schema.parse(await request.formData());
+    const data = await request.formData();
+    const { id } = schema.parse(data);
 	console.log(`delete customer with id ${id}`);
 	await service.deleteCustomer(Number.parseInt(id));
 	return redirect("/customers");

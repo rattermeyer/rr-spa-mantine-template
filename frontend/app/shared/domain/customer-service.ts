@@ -1,13 +1,11 @@
-import {inject, injectable,} from "inversify";
 import {CustomerRepository} from "~/modules/customer/domain/customer.repository";
-import type {InvoiceRepository} from "~/shared/domain/invoice-repository";
+import {inject, injectable} from 'inversify';
 
 @injectable()
 export class CustomerService {
     constructor(
         @inject(CustomerRepository.type)
         private customerRepository: CustomerRepository,
-        private invoiceRepository: InvoiceRepository,
     ) {
     }
 

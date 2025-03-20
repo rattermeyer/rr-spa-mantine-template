@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController("customers")
 @RequestMapping("/customers")
+@CrossOrigin
 @Slf4j
 public class CustomerController {
     private final CustomerRepository repository;

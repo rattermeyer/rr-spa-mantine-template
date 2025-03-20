@@ -72,7 +72,7 @@ export function RowActions({
 					<Center>Are you sure you want to delete the following item?</Center>
 					<Center>{keyDisplay}</Center>
 					<Flex>
-						<Form action={`${urlPrefix}/delete`} method="delete">
+						<Form action={`${urlPrefix}/delete`} method="post">
 							<input type="hidden" name="id" value={id} />
 							<Button
 								color="red"
