@@ -1,6 +1,11 @@
 import {Button, Flex} from "@mantine/core";
-import {MantineReactTable, type MRT_ColumnDef, useMantineReactTable,} from "mantine-react-table";
-import {useMemo} from "react";
+import {
+    MantineReactTable,
+    type MRT_ColumnDef,
+    type MRT_TableInstance,
+    useMantineReactTable,
+} from "mantine-react-table";
+import {useEffect, useMemo, useState} from "react";
 import {Link, NavLink} from "react-router";
 import {RemixFormProvider, useRemixForm} from "remix-hook-form";
 import {RowActions} from "~/components/row-actions/row-actions";
@@ -9,6 +14,11 @@ import type {Customer} from "~/shared/domain/customer.model";
 
 export function CustomerListPage(props: { customers: Customer[] }) {
     const {customers} = props;
+    const [data, setData] = useState<Customer[]>([]);
+
+    useEffect(() => {
+        setData(customers);
+    }, [customers]);
     const columns = useMemo<MRT_ColumnDef<Customer>[]>(
         () => [
             {
@@ -35,9 +45,9 @@ export function CustomerListPage(props: { customers: Customer[] }) {
         [],
     );
 
-    const table = useMantineReactTable({
+    const table = useMantineReactTable<Customer>({
         columns,
-        data: customers,
+        data,
         getRowId: (row) => String(row.customerId),
         enableRowActions: true,
         enableGrouping: true,

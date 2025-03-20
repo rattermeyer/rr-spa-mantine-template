@@ -1,13 +1,15 @@
 package com.example.demo.domain;
 
-import com.example.demo.infrastructure.db.jpa.Customer;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RestResource;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.example.demo.domain.model.Customer;
 
-@CrossOrigin
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
-    @Override
-    @RestResource(exported = false)
-    void deleteById(Long aLong);
+import java.util.List;
+
+public interface CustomerRepository {
+    List<Customer> loadCustomers();
+
+    Customer createCustomer(Customer customer);
+
+    void deleteCustomerById(Integer id);
+
+    Customer getCustomerById(Integer id);
 }

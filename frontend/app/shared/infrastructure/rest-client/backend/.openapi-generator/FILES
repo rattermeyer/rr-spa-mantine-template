@@ -1,0 +1,15 @@
+apis/CustomerEntityControllerApi.ts
+apis/ProfileControllerApi.ts
+apis/index.ts
+index.ts
+models/AbstractJsonSchemaPropertyObject.ts
+models/CollectionModelEntityModelCustomer.ts
+models/CollectionModelEntityModelCustomerEmbedded.ts
+models/CustomerRequestBody.ts
+models/EntityModelCustomer.ts
+models/Item.ts
+models/JsonSchema.ts
+models/Link.ts
+models/RepresentationModelObject.ts
+models/index.ts
+runtime.ts

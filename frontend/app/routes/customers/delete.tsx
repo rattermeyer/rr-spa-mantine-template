@@ -8,7 +8,7 @@ import type { Route } from "./+types/delete";
 const schema = zfd.formData({ id: z.string() });
 const service = container.get<CustomerService>(CustomerService);
 
-export async function action({ request, params }: Route.ClientActionArgs) {
+export async function clientAction({ request, params }: Route.ClientActionArgs) {
 	const { id } = schema.parse(await request.formData());
 	console.log(`delete customer with id ${id}`);
 	await service.deleteCustomer(Number.parseInt(id));

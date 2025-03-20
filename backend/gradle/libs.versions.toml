@@ -5,6 +5,7 @@ liquibaseVersion = "4.29.0"
 springbootVersion = "3.4.3"
 springdocVersion = "2.8.5"
 jooqVersion = "3.19.18"
+mapStructVersion = "1.6.3"
 
 [libraries]
 liquibase-core = { module = "org.liquibase:liquibase-core", version.ref = "liquibaseVersion" }
@@ -12,6 +13,9 @@ postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresqlVe
 picocli = { module = "info.picocli:picocli", version = "4.7.6" }
 springdoc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
 springdoc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version.ref = "springdocVersion" }
+mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapStructVersion" }
+mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapStructVersion" }
+lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-binding", version = "0.2.0" }
 
 [bundles]
 liquibase = ["liquibase-core", "postgresql", "picocli"]

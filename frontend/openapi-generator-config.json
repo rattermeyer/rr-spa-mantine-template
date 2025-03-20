@@ -1,0 +1,6 @@
+{
+  "npmName": "@rr-template/api-client",
+  "supportES6": true,
+  "fileNaming": "kebab-case",
+  "withInterfaces": true
+}

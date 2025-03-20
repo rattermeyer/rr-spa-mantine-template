@@ -25,9 +25,11 @@ sourceSets {
     main {
         java {
             srcDir("${layout.buildDirectory.get()}/generated-sources/jooq")
+            srcDir("${layout.buildDirectory.get()}/generated/sources/annotationProcessor/java/main")
         }
     }
 }
+
 
 repositories {
     mavenCentral()
@@ -37,6 +39,7 @@ repositories {
 
 dependencies {
     implementation(libs.springdoc.ui)
+    implementation(libs.mapstruct)
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
@@ -45,7 +48,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor(libs.lombok.mapstruct.binding)
     annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor(libs.mapstruct.processor)
+    testAnnotationProcessor(libs.mapstruct.processor)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     jooqCodegen(libs.postgresql)
@@ -99,4 +105,8 @@ jooq {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
 }
